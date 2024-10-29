@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_1", "ITMO_1\ITMO_1.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMo_2", "ITMo_2\ITMo_2.csproj", "{6640CC98-7C5A-4401-AD34-4B1BBA1445F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_3", "ITMO_3\ITMO_3.csproj", "{2C2EBF16-BA63-457A-A3B1-EFCA2E7C6FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_4", "ITMO_4\ITMO_4.csproj", "{AF5AD5E9-0E7A-4545-A793-1D3B4BE08437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{6640CC98-7C5A-4401-AD34-4B1BBA1445F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6640CC98-7C5A-4401-AD34-4B1BBA1445F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6640CC98-7C5A-4401-AD34-4B1BBA1445F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C2EBF16-BA63-457A-A3B1-EFCA2E7C6FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2EBF16-BA63-457A-A3B1-EFCA2E7C6FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2EBF16-BA63-457A-A3B1-EFCA2E7C6FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2EBF16-BA63-457A-A3B1-EFCA2E7C6FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5AD5E9-0E7A-4545-A793-1D3B4BE08437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5AD5E9-0E7A-4545-A793-1D3B4BE08437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5AD5E9-0E7A-4545-A793-1D3B4BE08437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5AD5E9-0E7A-4545-A793-1D3B4BE08437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
