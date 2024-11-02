@@ -13,14 +13,17 @@ namespace ITMO_8
             {
                 var s = Console.ReadLine();
                 var z = ZFunction(s);
+                var f = true;
                 for (var i = 0; i < s.Length; i++)
                 {
                     if (z[i] + i == s.Length)
                     {
                         Console.WriteLine(s.Substring(0,i));
+                        f = false;
                         break;
                     }
                 }
+                if(f) Console.WriteLine(s);
             }
         }
         
