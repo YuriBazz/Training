@@ -2,28 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ITMO_11
+namespace ITMO_14
 {
+
     class Program
     {
         static void Main(string[] args)
         {
             for (var q = int.Parse(Console.ReadLine()); q > 0; --q)
             {
-                var z = ZFunction(Console.ReadLine());
-                var count = new int[z.Length + 1];
-                foreach (var i in z)
-                {
-                    count[i]++;
-                }
-
-                var g = new int[z.Length + 1];
-                g[z.Length] = count[z.Length];
-                for (var i = z.Length - 1; i >= 0; --i)
-                {
-                    g[i] = g[i + 1] + count[i];
-                }
-                Write(g);
+                var s = Console.ReadLine();
+                var t = Console.ReadLine();
+                var st = Do(ZFunction(s + '$' + t), s, t);
+                var ts = Do(ZFunction(t + '$' + s), t, s);
+                Console.WriteLine(st.Length < ts.Length ? st : ts);
             }
         }
         
@@ -45,18 +37,27 @@ namespace ITMO_11
                     r = z[i] + i - 1;
                 }
             }
-            z[0] = z.Length;
             return z;
         }
         
         static void Write(int[] z)
         {
-            foreach (var t in z.Skip(1))
+            foreach (var t in z.Skip(0))
             {
                 Console.Write(t + " ");
                 
             }
             Console.Write("\n");
+        }
+
+        static string Do(int[] z, string s, string t) // z = s + $ + t
+        {
+            for (var i = 0; i < t.Length; ++i)
+            {
+                if (z[i + s.Length + 1] == s.Length) return t;
+                if (z[i + s.Length + 1] == t.Length - i) return t + s.Substring(z[i + s.Length + 1]);
+            }
+            return s + t;
         }
     }
 }
