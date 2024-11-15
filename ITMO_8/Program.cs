@@ -47,5 +47,11 @@ namespace ITMO_8
             }
             return z;
         }
+
+        static int[] ReadInts()
+        {
+            return Console.ReadLine().Split().Select(int.Parse).ToArray();
+            // x => int.Parse(x)
+        }
     }
 }
