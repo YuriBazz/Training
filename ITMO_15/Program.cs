@@ -11,15 +11,8 @@ namespace ITMO_15
             var input = Console.ReadLine().Split();
             int n = int.Parse(input[0]), m = int.Parse(input[1]);
             var s = String.Join("", Console.ReadLine().Split());
-            var z = ZFunction(s);
-            var z2 = ZFunction(new string(s.Reverse().ToArray()));
-            var z3 = ZFunction(new string(s.Reverse().ToArray()) + '$' + s);
-            z3[0] = s.Length;
-            
-            for(var i = 0; i < s.Length / 2; ++i)
-                if(z3[i] == z3[i + s.Length + 1])
-                    Console.Write(i + s.Length  + " ");
-            Console.Write(s.Length);
+            var z = ZFunction(new string(s + '$' + new string(s.Reverse().ToArray())));
+            Write(z);
         }
         
         static int[] ZFunction(string s)
@@ -40,8 +33,6 @@ namespace ITMO_15
                     r = z[i] + i - 1;
                 }
             }
-
-            z[0] = s.Length;
             return z;
         }
         
