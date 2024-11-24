@@ -73,6 +73,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kontur_W_2024_D", "Kontur_W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kontur_W_2024_E", "Kontur_W_2024_E\Kontur_W_2024_E.csproj", "{4FA13451-3F21-4ECC-9658-3D9FA553B081}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_17", "ITMO_17\ITMO_17.csproj", "{A4DD0F1D-DCD8-4D1E-8051-1233A263144B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_18", "ITMO_18\ITMO_18.csproj", "{D8E64B21-2E45-44DC-AA11-CFB4F7E6A26B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +223,14 @@ Global
 		{4FA13451-3F21-4ECC-9658-3D9FA553B081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FA13451-3F21-4ECC-9658-3D9FA553B081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FA13451-3F21-4ECC-9658-3D9FA553B081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4DD0F1D-DCD8-4D1E-8051-1233A263144B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4DD0F1D-DCD8-4D1E-8051-1233A263144B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4DD0F1D-DCD8-4D1E-8051-1233A263144B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4DD0F1D-DCD8-4D1E-8051-1233A263144B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8E64B21-2E45-44DC-AA11-CFB4F7E6A26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E64B21-2E45-44DC-AA11-CFB4F7E6A26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E64B21-2E45-44DC-AA11-CFB4F7E6A26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8E64B21-2E45-44DC-AA11-CFB4F7E6A26B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
