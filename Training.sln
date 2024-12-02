@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_21", "ITMO_21\ITMO_21.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_22", "ITMO_22\ITMO_22.csproj", "{F55C88E8-782A-4E1D-BBE2-159AC27A6AB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITMO_24", "ITMO_24\ITMO_24.csproj", "{3372C5EE-F414-476E-90E7-96754B50E5DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -255,6 +257,10 @@ Global
 		{F55C88E8-782A-4E1D-BBE2-159AC27A6AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F55C88E8-782A-4E1D-BBE2-159AC27A6AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F55C88E8-782A-4E1D-BBE2-159AC27A6AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3372C5EE-F414-476E-90E7-96754B50E5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3372C5EE-F414-476E-90E7-96754B50E5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3372C5EE-F414-476E-90E7-96754B50E5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3372C5EE-F414-476E-90E7-96754B50E5DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
