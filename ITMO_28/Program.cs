@@ -44,9 +44,9 @@ namespace ITMO_28
 
         static bool Check(Dictionary<char, int> dic, long m, long r,int nb, int nc,int ns, int pb,int ps,int pc)
         {
-            long mb = dic['B'] == int.MaxValue ? 0 : m * dic['B'] - nb,
-                mc = dic['C'] == int.MaxValue ? 0 : m * dic['C'] - nc,
-                ms = dic['S'] == int.MaxValue ? 0 : m * dic['S'] - ns;
+            long mb = dic['B'] == int.MaxValue ? 0 : Math.Max(m * dic['B'] - nb, 0),
+                mc = dic['C'] == int.MaxValue ? 0 : Math.Max(m * dic['C'] - nc,0),
+                ms = dic['S'] == int.MaxValue ? 0 : Math.Max(m * dic['S'] - ns,0);
             return mb * pb  + ms * ps  + mc * pc  <= r;
         }
     }
