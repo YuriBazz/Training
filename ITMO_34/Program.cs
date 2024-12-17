@@ -24,6 +24,7 @@ namespace ITMO_34
                 if (net.Check(X)) right = X;
                 else left = X;
             }
+            
             net.Path.Write();
             
         }
@@ -57,6 +58,7 @@ namespace ITMO_34
             for (var queue = new Queue<PathNode>([new PathNode(N)]); queue.Count > 0;)
             {
                 var current = queue.Dequeue();
+                visited.Add(current.CurrentNumber);
                 foreach (var nextPair in Edges[current.CurrentNumber])
                 {
                     if(visited.Contains(nextPair.Item1))
