@@ -15,11 +15,7 @@ namespace ITMO_76
             while (m-- > 0)
             {
                 var c = Read();
-                if (c[0] == 1)
-                {
-                    tree.Set(c[1],c[3]);
-                    tree.Set(c[2],c[3],false);
-                }
+                if (c[0] == 1) tree.Add(c[3],c[1],c[2]);
                 else Console.WriteLine(tree.Find(c[1]));
             }
         }
@@ -37,30 +33,33 @@ namespace ITMO_76
             tree = new long[2 * size - 1];
         }
 
-        public long Find(int i) => Find(i + 1 , 0, 0, size);
+        public long Find(int i) => Sum(0, i + 1, 0, 0, size);
 
-        public long Find(int i, int x, int lx, int rx)
+        public void Add(int v, int l, int r)
         {
-            if (lx >= i) return 0;
-            if (rx <= i) return tree[x];
-            var m = lx + (rx - lx) / 2;
-            return Find(i, 2 * x + 1, lx, m) + Find(i, 2 * x + 2, m, rx);
+            Set(l,v, 0, 0, size);
+            Set(r, -v, 0, 0, size);
         }
 
-        public void Set(int i, int v, bool left = true) => Set(v,i,0,0,size, left);
-        
+        public long Sum(int l, int r, int x, int lx, int rx)
+        {
+            if(rx <= l || r <= lx) return 0;
+            if (l <= lx && rx <= r) return tree[x];
+            var m = lx + (rx - lx) / 2;
+            return Sum(l, r, 2 * x + 1, lx, m) + Sum(l, r, 2 * x + 2,m,rx);
+        }
 
-        public void Set(long v, int i, int x, int lx, int rx, bool left)
+        public void Set(int i, long v, int x, int lx, int rx)
         {
             if (rx - lx == 1)
             {
-                tree[x] += left ? v : -v;
+                tree[x] += v;
                 return;
             }
-
+            
             var m = lx + (rx - lx) / 2;
-            if(i < m) Set(v,i,2 * x + 1,lx, m, left);
-            else Set(v, i, 2 * x +2,m,rx,left);
+            if(i < m) Set(i, v,2 * x + 1, lx,m);
+            else Set(i, v, 2 * x + 2, m, rx);
 
             tree[x] = tree[2 * x + 1] + tree[2 * x + 2];
         }
