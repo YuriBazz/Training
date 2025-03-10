@@ -2,24 +2,24 @@
 
 class Program
 {
+    static int[] Read() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
+    
     static void Main(string[] args)
     {
+        
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
+            Console.ReadLine();
             var s = Console.ReadLine();
-            while (s.Length != 0)
+            var c = s[s.Length / 2];
+            var count = 0;
+            for (int r = s.Length / 2, l = s.Length % 2 == 0 ? r - 1 : r; l >= 0 && r < s.Length; l--, r++)
             {
-                var rev = new string(s.Reverse().ToArray());
-                if (s != rev)
-                {
-                    Console.WriteLine(s.Length);
-                    break;
-                }
-
-                s = s.Substring(0, s.Length - 1);
+                if (s[l] == c && s[r] == c) count += 2;
+                else break;
+                if (l == r) count--;
             }
-            
-            if(s.Length == 0) Console.WriteLine(-1);
+            Console.WriteLine(count);
         }
     }
     

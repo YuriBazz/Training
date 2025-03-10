@@ -8,8 +8,12 @@ class Program
     {
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
-            var n = long.Parse(Console.ReadLine());
-            
+            Console.ReadLine();
+            var a = Read();
+            var b = Read();
+            if (a.SequenceEqual(b) || a.SequenceEqual(b.Reverse())) 
+                Console.WriteLine("Bob");
+            else Console.WriteLine("Alice");
         }
     }
 }

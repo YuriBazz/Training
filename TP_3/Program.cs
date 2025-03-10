@@ -4,7 +4,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace TP_3;
 class Program
 {
-    static long[] Read() => Console.ReadLine().Split(" ").Select(long.Parse).ToArray();
+    static int[] Read() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
 
     static void Write<T>(T[] a) => Console.WriteLine(string.Join(" ", a));
     
@@ -12,15 +12,31 @@ class Program
     {
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
-            Console.ReadLine();
-            var a = Read();
-            for (var i = 0; i < a.Length - 1; ++i)
-                if (a[i + 1] % a[i] == 0)
-                    a[i]++;
-            for (var i = 1; i < a.Length; ++i)
-                if (a[i] % a[i - 1] == 0)
-                    a[i]++;
-            Write(a);
+            var n = int.Parse(Console.ReadLine());
+            var s = (n + 1) * n / 2;
+            var list = new List<int[]>();
+            while (n-- > 0)
+                list.Add(Read());
+            for (var i = 0; i < list.Count; ++i)
+            {
+                var non = s - list[i].Sum();
+                var first = true;
+                for (var j = 0; j < list.Count; ++j)
+                {
+                    if (i == j) continue;
+                    if (list[j][0] != non)
+                    {
+                        first = false;
+                        break;
+                    }
+                }
+
+                if (first)
+                {
+                    Console.WriteLine(non + " " + string.Join(" ", list[i]));
+                    break;
+                }
+            }
         }
     }
 }

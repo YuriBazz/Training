@@ -2,30 +2,26 @@
 
 class Program
 {
-    private const long mod = (long)1e9 + 7;
     
     static int[] Read() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
     
     static void Main(string[] args)
     {
-        var d = new Dictionary<int, long>();
+       
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
-            var n = int.Parse(Console.ReadLine());
-            if (!d.ContainsKey(n)) d[n] = Fact(n);
-            Console.WriteLine(d[n] * n % mod * (n - 1) % mod);
+            Console.ReadLine();
+            var a = Read();
+            var gcd = 0;
+            foreach (var n in a)
+                gcd = GCD(n, gcd);
+            Console.WriteLine( a[^1] / gcd);
         }
     }
 
-    static long Fact(int n)
+    static int GCD(int a, int b)
     {
-        var res = 1L;
-        for (var i = 1; i <= n; ++i)
-        {
-            res *= i;
-            res %= mod;
-        }
-
-        return res;
+        while (b != 0) (a, b) = (b, a % b);
+        return a;
     }
 }
