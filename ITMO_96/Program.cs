@@ -4,71 +4,79 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        var tree = new SegTree();
+        for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
+        {
+            var s = Console.ReadLine().Split(" ");
+            tree.Set(s[0], int.Parse(s[1]), int.Parse(s[2]));
+            Console.WriteLine(tree.Get);
+        }
     }
 }
 
 class SegTree
 {
     private readonly int size;
-    private readonly ((long count, long len,bool first, bool last) value, long operation)[] tree;
-    private const int Shift = (int)5e5;
+    private readonly ((long count, long len, long left, long right) value, long operation)[] tree;
+    private const long Shift =(long)5e5;
 
     private const long NeutralOp = -1;
     
     public SegTree()
     {
         size = 1;
-        while (size < 1e6) size <<= 1;
-        tree = new ((long, long, bool,bool), long operation)[(size << 1) - 1];
-        Array.Fill(tree,((0,0,false,false),-1));
+        while (size < 1e6 + 1) size <<= 1;
+        tree = new ((long count, long len,long,long), long operation)[(size << 1) - 1];
+        Array.Fill(tree,((0,0,0,0),-1));
     }
 
     private int Left(int x) => (x << 1) + 1;
     private int Right(int x) => Left(x) + 1;
 
-    
-    
-    
-    private (long, long, bool,bool) Modify((long count, long len, bool first, bool last) prev, long operation, int lx, int rx, int l = int.MinValue, int r = int.MaxValue)
+    public string Get => $"{tree[0].value.count} {tree[0].value.len}";
+
+    private (long, long, long, long) Modify((long count, long len, long left, long righ) prev, long operation, long len)
     {
         if (operation == NeutralOp) return prev;
-        var lc = Math.Max(l, lx);
-        var rc = Math.Min(r, rx);
-        
+        if (operation == 0) return (0, 0, 0, 0);
+        return (1, len, 1, 1);
+
     }
 
     private void PushDown(int x, int lx, int rx)
     {
         if (rx - lx == 1 || tree[x].operation == NeutralOp) return;
-        var op = -1L;
-        (op, tree[x].operation) = (tree[x].operation, op);
+        var op = tree[x].operation;
+        tree[x].operation = -1;
         var m = lx + (rx - lx) / 2;
         tree[Left(x)].operation = op;
         tree[Right(x)].operation = op;
-        
+        tree[Left(x)].value = Modify(tree[Left(x)].value, tree[Left(x)].operation, m - lx);
+        tree[Right(x)].value = Modify(tree[Right(x)].value, tree[Right(x)].operation, rx - m);
     }
 
-    // Вообще говоря я хочу хранить какие-то значения на концах и на началах переписываемых в черные отрезках, чтобы одновременно получать и суммарные длины, и кол-во отрезков 
-    private void Set(int l, int r, int v, int x, int lx, int rx)
+    
+    private void Set(long l, long r, int v, int x, int lx, int rx)
     {
-        PushDown(x,lx,rx);
+        PushDown(x, lx, rx);
         if (lx >= r || rx <= l) return;
         if (l <= lx && rx <= r)
         {
             tree[x].operation = v;
-            ModifyNode(x, rx - lx);
+            tree[x].value = Modify(tree[x].value, tree[x].operation, rx - lx);
             return;
         }
 
         var m = lx + (rx - lx) / 2;
-        Set(l,r,v,Left(x),lx,m);
-        Set(l,r,v,Right(x),m,rx);
+        Set(l,r,v,Left(x),lx, m);
+        Set(l,r,v,Right(x),m, rx);
         tree[x].value.len = tree[Left(x)].value.len + tree[Right(x)].value.len;
         tree[x].value.count = tree[Left(x)].value.count + tree[Right(x)].value.count;
-        if()
-        ModifyNode(x,Math.Min(r,rx) - Math.Max(l,lx));
+        if (tree[Left(x)].value.right == 1 && tree[Right(x)].value.left == 1)
+            tree[x].value.count--;
+        tree[x].value.left = tree[Left(x)].value.left;
+        tree[x].value.right = tree[Right(x)].value.right;
     }
 
-    public void Set(string color, int x, int len) => Set(x + Shift, x + len + Shift, color == "W" ? 0 : 1, 0, 0, size);
+    public void Set(string color, long x, long len) => Set(x + Shift, x + len + Shift, color == "W" ? 0 : 1, 0, 0, size);
 }
