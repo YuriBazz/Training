@@ -9,17 +9,18 @@ class Program
         
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
-            Console.ReadLine();
-            var s = Console.ReadLine();
-            var c = s[s.Length / 2];
-            var count = 0;
-            for (int r = s.Length / 2, l = s.Length % 2 == 0 ? r - 1 : r; l >= 0 && r < s.Length; l--, r++)
+            var n = int.Parse(Console.ReadLine());
+            var b = Read();
+            var f = false;
+            for (var i = 1; i < b.Length - 1; ++i)
             {
-                if (s[l] == c && s[r] == c) count += 2;
-                else break;
-                if (l == r) count--;
+                if (b[i] == 0)
+                {
+                    f = b[i - 1] == 1 && b[i + 1] == 1;
+                }
+                if(f) break;
             }
-            Console.WriteLine(count);
+            Console.WriteLine(f ? "NO" : "YES");
         }
     }
     

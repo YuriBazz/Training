@@ -10,18 +10,28 @@ class Program
        
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
-            Console.ReadLine();
-            var a = Read();
-            var gcd = 0;
-            foreach (var n in a)
-                gcd = GCD(n, gcd);
-            Console.WriteLine( a[^1] / gcd);
+            var p = Read();
+            var a = new int[p[0]];
+            var m = p[1];
+            for (var i = 0; i < a.Length; ++i)
+            {
+                a[i] = i + 1;
+               
+            }
+
+            var res = new int[p[0]];
+            var temp = 0;
+            for (var k = m - 1; k < res.Length; k += m)
+                res[k] = a[temp++];
+            for (var i = 0; i < res.Length; ++i)
+            {
+                if(res[i] != 0 ) continue;
+                res[i] = a[temp++];
+            }
+            Console.WriteLine(string.Join(" ", res));
         }
     }
 
-    static int GCD(int a, int b)
-    {
-        while (b != 0) (a, b) = (b, a % b);
-        return a;
-    }
+    
+    
 }

@@ -6,14 +6,24 @@ class Program
     
     static void Main(string[] args)
     {
+        
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
             Console.ReadLine();
             var a = Read();
-            var b = Read();
-            if (a.SequenceEqual(b) || a.SequenceEqual(b.Reverse())) 
-                Console.WriteLine("Bob");
-            else Console.WriteLine("Alice");
+            var set = new HashSet<int>();
+            var res = 0L;
+            for (var i = 1; i < a.Length; ++i)
+            {
+                if (a[i] < a[i - 1])
+                {
+                    res += a[i - 1] - a[i];
+                    set.Add(a[i - 1] - a[i]);
+                    a[i] = a[i - 1];
+                }
+            }
+            
+            Console.WriteLine(res + set.Count);
         }
     }
 }

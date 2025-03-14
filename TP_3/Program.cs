@@ -12,31 +12,37 @@ class Program
     {
         for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
         {
-            var n = int.Parse(Console.ReadLine());
-            var s = (n + 1) * n / 2;
-            var list = new List<int[]>();
-            while (n-- > 0)
-                list.Add(Read());
-            for (var i = 0; i < list.Count; ++i)
-            {
-                var non = s - list[i].Sum();
-                var first = true;
-                for (var j = 0; j < list.Count; ++j)
-                {
-                    if (i == j) continue;
-                    if (list[j][0] != non)
-                    {
-                        first = false;
-                        break;
-                    }
-                }
-
-                if (first)
-                {
-                    Console.WriteLine(non + " " + string.Join(" ", list[i]));
-                    break;
-                }
-            }
+            Console.ReadLine();
+            var s = Read();
+            var bonuses = new Stack<int>();
+            var last = Array.LastIndexOf(s, 0);
+            var count = 0;
+            var used = new HashSet<int>();
+            var st = 0L;
+            for(var i = 0; i < s.Length; ++i)
+                if (s[i] == 0)
+                    st += Max(used, s, i);
+            Console.WriteLine(st);
         }
     }
+
+    static int Max(HashSet<int> set, int[] s, int last)
+    {
+        var max =0;
+        var ind = -1;
+        for (var i = 0; i <= last; ++i)
+        {
+            if (max <= s[i] && !set.Contains(i))
+            {
+                ind = i;
+                max = s[i];
+            }
+        }
+
+        if (max != 0)
+            set.Add(ind);
+        return max;
+    }
+
+    
 }
