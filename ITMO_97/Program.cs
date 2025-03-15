@@ -13,8 +13,8 @@ class Program
         while (t[1]-- > 0)
         {
             var c = Read();
-            if(c[0] == 1) tree.Add(c[1],c[2],c[3]);
-            else Console.WriteLine(tree.Sum(c[1],c[2]));
+            //if(c[0] == 1) tree.Add(c[1],c[2],c[3]);
+            //else Console.WriteLine(tree.Sum(c[1],c[2]));
         }
     }
 }
@@ -43,7 +43,7 @@ class SegTree
     {
         if (rx - lx == 1)
         {
-            if (lx < a.Length) tree[x] = ((lx + 1) * a[lx], a[lx], 0, 0);
+            if (lx < a.Length) tree[x] = ( a[lx], a[lx], 0, 0);
             else tree[x] = (0, 0, 0,0);
             return;
         }
@@ -53,38 +53,8 @@ class SegTree
         Build(a,Right(x),m,rx);
 
         tree[x].value1 = tree[Left(x)].value1 + tree[Right(x)].value1;
-        tree[x].value2 = tree[Left(x)].value2 + tree[Right(x)].value2;
+        tree[x].value2 = tree[Left(x)].value2 + tree[Right(x)].value1 + (rx - lx) * tree[Right(x)].value1 / 2;
     }
     
-    private void Add(int l, int r, int d, int x, int lx, int rx)
-    {
-        if (lx >= r || rx <= l) return;
-        if (l <= lx && rx <= r)
-        {
-            tree[x].oper1 += d * (pref[rx] - pref[lx]);
-            tree[x].value1 += d * (pref[rx] - pref[lx]);
-            tree[x].oper2 += (rx - lx) * d;
-            tree[x].value2 += (rx - lx) * d;
-            return;
-        }
 
-        var m = lx + (rx - lx) / 2;
-        Add(l,r,d,Left(x),lx,m);
-        Add(l, r, d, Right(x), m, rx);
-        
-        tree[x].value1 = tree[Left(x)].value1 + tree[Right(x)].value1 + tree[x].oper1;
-        tree[x].value2 = tree[Left(x)].value2 + tree[Right(x)].value2 + tree[x].oper2;
-    }
-
-    private long Sum(int l, int r, int x, int lx, int rx)
-    {
-        if (lx >= r || rx <= l) return 0;
-        if (l <= lx && rx <= r) return tree[x].oper1 - lx * tree[x].value2;
-
-        var m = lx + (rx - lx) / 2;
-        var left = Sum(l, r, Left(x), lx, m);
-        var right = Sum(l, r, Right(x), m, rx);
-        var val2 = 0;
-        return (left + right + tree[x].oper1) - Math.Max(l,lx) * ()
-    }
 }
