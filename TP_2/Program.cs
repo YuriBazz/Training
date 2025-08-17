@@ -1,37 +1,43 @@
-﻿namespace TP_2;
+﻿using System;
+using System.Collections;
+using System.Linq;
+using System.Numerics;
+using System.Text;
 
-class Program
+namespace TP_2;
+     
+static class Program
 {
-    
-    static int[] Read() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
-    
-    static void Main(string[] args)
-    {
-       
-        for (var t = int.Parse(Console.ReadLine()); t > 0; --t)
-        {
-            var p = Read();
-            var a = new int[p[0]];
-            var m = p[1];
-            for (var i = 0; i < a.Length; ++i)
-            {
-                a[i] = i + 1;
-               
-            }
+    static string[] Read() => Console.ReadLine().Select(x => new string(new[] {x})).ToArray(); // string performed as array of strings
+    static long[] ReadL() => Console.ReadLine().Split(" ").Select(long.Parse).ToArray(); // array of longs
+    static int[] ReadI() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray(); // array of ints
+    static void Write<T>(IEnumerable<T> a) => Console.WriteLine(string.Join(" ", a));
 
-            var res = new int[p[0]];
-            var temp = 0;
-            for (var k = m - 1; k < res.Length; k += m)
-                res[k] = a[temp++];
-            for (var i = 0; i < res.Length; ++i)
-            {
-                if(res[i] != 0 ) continue;
-                res[i] = a[temp++];
-            }
-            Console.WriteLine(string.Join(" ", res));
+    public static void Main(string[] args)
+    {
+        var s = Console.ReadLine();
+        if(s is null) return;
+        unsafe
+        {
+            fixed (char* a = s) Console.WriteLine(*(a + s.Length));
+                
+            
+        }
+        
+        
+        for (var t =0 /* ReadL()[0]*/; t > 0; --t)
+        { 
         }
     }
 
-    
-    
+    static unsafe void ChangeA(string str)
+    {
+        fixed (char* i = str)
+        {
+            for (var x = 0; x < str.Length; ++x)
+                *(i + x) = *(i + x) == 'a' ? '1' : *(i + x);
+        }
+        
+        Console.WriteLine(str);
+    }
 }

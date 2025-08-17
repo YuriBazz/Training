@@ -1,41 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text;
 
 namespace T_2_2025
 {
     static class Program
     {
+        static string[] Read() => Console.ReadLine().Select(x => new string(new[] {x})).ToArray();
+        static long[] ReadL() => Console.ReadLine().Split(" ").Select(long.Parse).ToArray(); 
+        static int[] ReadI() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray(); 
+        static (int val, int ind)[] ReadII(int i = 0) =>
+            Console.ReadLine().Split(" ").Select(x => (int.Parse(x), i++)).ToArray();
+        static (long val, int ind)[] ReadLI(int i = 0) =>
+            Console.ReadLine().Split(" ").Select(x => (long.Parse(x), i++)).ToArray();
+        static void Write<T>(IEnumerable<T> a) => Console.WriteLine(string.Join(" ", a));
+        
         static void Main(string[] args)
         {
-            for (var n = int.Parse(Console.ReadLine()); n > 0; --n)
+            var GENERIC_VARIABLE_NAME = 1;
+            for (; GENERIC_VARIABLE_NAME > 0; --GENERIC_VARIABLE_NAME)
             {
-                var s = Convert.ToString(long.Parse(Console.ReadLine()), 2);
-                var sum = 0L;
-                var count = 0;
-                for (var i = 0; i < s.Length ; ++i)
+                var s = Console.ReadLine();
+                List<int> i = new(), j = new(), k = new();
+                for (var x = 0; x < s.Length; ++x)
                 {
-                    if (s[i] == '1')
-                    {
-                        sum += QuickPow(2, s.Length - 1 - i);
-                        ++count;
-                    }
-                    if (count == 3) break;
+                    if (s[x] == 'a') i.Add(x);
+                    if (s[x] == 'b') j.Add(x);
+                    if (s[x] == 'c') k.Add(x);
                 }
-                
-                Console.WriteLine(count == 3 ? sum : -1);
+
+                var res = 0L;
+                for (var x = 0; x < k.Count; ++x)
+                {
+                    var t = Temp(j, k[x]);
+                    if(t == 0) continue;
+                    var p = Temp(i, j[t - 1]);
+                    res += t * p;
+                }
+                Console.WriteLine(res);
             }
         }
-        
-        static long QuickPow(long value, long pow)
+
+        static int Temp(List<int> a, int v)
         {
-            var result = 1L;
-            var temp = value;
-            while (pow != 0)
+            int l = -1, r = a.Count;
+            while (r - l > 1)
             {
-                result *= (pow % 2 == 0 ? 1 : temp);
-                temp *=  temp;
-                pow /= 2;
+                var m = l + (r - l) / 2;
+                if (a[m] < v) l = m;
+                else r = m;
             }
-            return result;
+            return l + 1;
         }
     }
 }

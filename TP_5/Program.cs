@@ -4,7 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace TP_6;
+namespace TP_5;
 static class Program
 {
     static string[] Read() => Console.ReadLine().Select(x => new string(new[] {x})).ToArray(); // string performed as array of strings
@@ -12,9 +12,9 @@ static class Program
     static int[] ReadI() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray(); // array of ints
 
     static (int val, int ind)[] ReadII(int i = 0) =>
-        Console.ReadLine().Split(" ").Select(x => (int.Parse(x), i++)).ToArray();
+            Console.ReadLine().Split(" ").Select(x => (int.Parse(x), i++)).ToArray();
     static (long val, int ind)[] ReadLI(int i = 0) =>
-        Console.ReadLine().Split(" ").Select(x => (long.Parse(x), i++)).ToArray();
+            Console.ReadLine().Split(" ").Select(x => (long.Parse(x), i++)).ToArray();
         
         
     static void Write<T>(IEnumerable<T> a) => Console.WriteLine(string.Join(" ", a));
@@ -60,6 +60,7 @@ static class Program
         }
         return b;
     }
-    
-    
 }
+
+
+    

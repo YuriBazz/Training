@@ -1,48 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Text;
 
 namespace T_3_2025
 {
     static class Program
     {
-        static long[] ReadLongs() => Console.ReadLine().Split(" ").Select(long.Parse).ToArray();
+        static string[] Read() => Console.ReadLine().Select(x => new string(new[] {x})).ToArray();
+        static long[] ReadL() => Console.ReadLine().Split(" ").Select(long.Parse).ToArray(); 
+        static int[] ReadI() => Console.ReadLine().Split(" ").Select(int.Parse).ToArray(); 
+        static (int val, int ind)[] ReadII(int i = 0) =>
+            Console.ReadLine().Split(" ").Select(x => (int.Parse(x), i++)).ToArray();
+        static (long val, int ind)[] ReadLI(int i = 0) =>
+            Console.ReadLine().Split(" ").Select(x => (long.Parse(x), i++)).ToArray();
+        static void Write<T>(IEnumerable<T> a) => Console.WriteLine(string.Join(" ", a));
         
         static void Main(string[] args)
         {
-            var token = ReadLongs();
-            var m = (int)token[1];
-            var days = ReadLongs();
-            long first = days[0], second = days[1];
-            var min = long.MaxValue;
-            Array.Sort(days);
-            for (var (l, r) = (0, 0); r < days.Length; ++r)
+            var GENERIC_VARIABLE_NAME = 1;
+            for (; GENERIC_VARIABLE_NAME > 0; --GENERIC_VARIABLE_NAME)
             {
-                var f = false;
-                while (l < days.Length && CountGoodPoints(days[l], days[r], days) >= m + 2)
+                var t = new Node();
+                Console.ReadLine();
+                var cur = t;
+                var s = Console.ReadLine();
+                for (var x = 0; x < s.Length; ++x)
                 {
-                    ++l;
-                    f = true;
+                    var temp = cur;
+                    var next = new Node(x + 1);
+                    if (s[x] == 'L')
+                    {
+                        next.Prev = temp.Prev;
+                        if (temp.Prev == null)
+                            t = next;
+                        else temp.Prev.Next = next;
+                        temp.Prev = next;
+                        next.Next = temp;
+                    }
+                    else
+                    {
+                        next.Next = temp.Next;
+                        temp.Next = next;
+                        next.Prev = temp;
+                    }
+                    cur = next;
                 }
-                if (f)
-                    min = Math.Min(min, Math.Abs(second - days[r]) + Math.Abs(first - days[l - 1]));
-            }
-            Console.WriteLine(min);
-        }
 
-        static int CountGoodPoints(long l, long r, long[] array) => array.BS(r + 1, 1) - array.BS(l - 1, 0) - 1;
-        
-        static int BS(this long[] array, long value, int side)
-        {
-            int l = -1, r = array.Length;
-            while (r > l + 1)
-            {
-                int m = l + (r - l) / 2;
-                if (side == 0 ? array[m] <= value : array[m] < value)
-                    l = m;
-                else r = m;
+                while (t != null)
+                {
+                    Console.Write(t.Value + " ");
+                    t = t.Next;
+                }
+
+                Console.WriteLine();
             }
-            return side == 0 ? l : r;
+        }
+    }
+
+    class Node
+    {
+        public Node? Prev, Next;
+        public int Value;
+
+        public Node(int val = 0)
+        {
+            Value = val;
         }
     }
 }
